@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
+
 export class ApiService {
 
-  baseurl = "http://127.0.0.1:8000"
+  private apiRoot = 'http://localhost:8000/';
 
   constructor(private http: HttpClient) { }
 
-  getAllTodoList(): Observable<any>{
-    return this.http.get(this.baseurl + "/todo-list")
+  getTodoList() {
+    return this.http.get(this.apiRoot.concat('todo-list/'));
+  }
+
+  createTodo(nome: string, inicio: Date, fim: Date, status: boolean) {
+    return this.http.post(
+      this.apiRoot.concat('todo-list/'),
+      { nome, inicio, fim,  status}
+    );
+  }
+
+  deleteTodo(id: number) {
+    return this.http.delete(this.apiRoot.concat('todo-list/$[id]/'));
   }
 }
