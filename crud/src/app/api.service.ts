@@ -14,7 +14,7 @@ export class ApiService {
     return this.http.get(this.apiRoot.concat('todo-list/'));
   }
 
-  createTodo(nome: string, inicio: number, fim: number, status: boolean) {
+  createTodo(nome: string, inicio: Date, fim: Date, status: boolean) {
     return this.http.post(
       this.apiRoot.concat('todo-list/'),
       { nome, inicio, fim,  status}
